@@ -10,6 +10,7 @@ import javax.persistence.Converter;
  */
 @Converter
 public class PersonTypeConverter implements AttributeConverter<PersonType, String> {
+    
     @Override
     public String convertToDatabaseColumn(PersonType personType) {
         return personType.getCode();
