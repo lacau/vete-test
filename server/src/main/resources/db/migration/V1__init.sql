@@ -62,6 +62,21 @@ CREATE TABLE `vaccine_treatment` (
   REFERENCES `vaccine` (`vaccine_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `schedule_vaccine` (
+  `schedule_vaccine_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fk_vaccine` bigint(20) NOT NULL,
+  `fk_client` bigint(20) NOT NULL,
+  `fk_animal` bigint(20) NOT NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`schedule_vaccine_id`),
+  CONSTRAINT `FK_SV_TO_VACCINE` FOREIGN KEY (`fk_vaccine`)
+  REFERENCES `vaccine` (`vaccine_id`),
+  CONSTRAINT `FK_SV_TO_CLIENT` FOREIGN KEY (`fk_client`)
+  REFERENCES `person` (`person_id`),
+  CONSTRAINT `FK_SV_TO_ANIMAL` FOREIGN KEY (`fk_animal`)
+    REFERENCES `animal` (`animal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- INSERTS
 -- users
 INSERT INTO `user` (`user_id`, `user_admin`, `user_login`, `user_password`)
