@@ -1,10 +1,10 @@
 package io.redspark.controller;
 
-import io.redspark.controller.converter.VaccineConverter;
 import io.redspark.controller.dto.VaccineDTO;
 import io.redspark.domain.Vaccine;
 import io.redspark.exception.WebException;
 import io.redspark.repository.VaccineRepository;
+import io.redspark.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +23,7 @@ public class VaccineController {
     @Autowired
     private VaccineRepository vaccineRepository;
 
-    @Autowired
-    private VaccineConverter vaccineConverter;
+    private MapperUtils<Vaccine, VaccineDTO> vaccineConverter = new MapperUtils<>(Vaccine.class, VaccineDTO.class);
 
     @RequestMapping(value = "/{id}", method = GET)
     public VaccineDTO get(@PathVariable("id") final Long id) {
@@ -45,7 +44,7 @@ public class VaccineController {
             throw new WebException(HttpStatus.NOT_FOUND, "vaccine.not.found");
         }
 
-        return vaccineConverter.convert(vaccineList);
+        return vaccineConverter.toDTO(vaccineList);
     }
 
     @RequestMapping(value = "/list/{name}", method = GET)
@@ -56,6 +55,6 @@ public class VaccineController {
             throw new WebException(HttpStatus.NOT_FOUND, "vaccine.not.found");
         }
 
-        return vaccineConverter.convert(vaccineList);
+        return vaccineConverter.toDTO(vaccineList);
     }
 }

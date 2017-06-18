@@ -1,10 +1,10 @@
 package io.redspark.controller;
 
-import io.redspark.controller.converter.AnimalConverter;
 import io.redspark.controller.dto.AnimalDTO;
 import io.redspark.domain.Animal;
 import io.redspark.exception.WebException;
 import io.redspark.repository.AnimalRepository;
+import io.redspark.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +23,7 @@ public class AnimalController {
     @Autowired
     private AnimalRepository animalRepository;
 
-    @Autowired
-    private AnimalConverter animalConverter;
+    private MapperUtils<Animal, AnimalDTO> animalConverter = new MapperUtils<>(Animal.class, AnimalDTO.class);
 
     @RequestMapping(value = "/{id}", method = GET)
     public AnimalDTO get(@PathVariable("id") final Long id) {
@@ -45,7 +44,7 @@ public class AnimalController {
             throw new WebException(HttpStatus.NOT_FOUND, "animal.not.found");
         }
 
-        return animalConverter.convert(animalList);
+        return animalConverter.toDTO(animalList);
     }
 
     @RequestMapping(value = "/list/{name}", method = GET)
@@ -56,6 +55,6 @@ public class AnimalController {
             throw new WebException(HttpStatus.NOT_FOUND, "vaccine.not.found");
         }
 
-        return animalConverter.convert(animalList);
+        return animalConverter.toDTO(animalList);
     }
 }

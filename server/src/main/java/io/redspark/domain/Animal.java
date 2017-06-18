@@ -32,6 +32,6 @@ public class Animal {
     @Convert(converter = AnimalTypeConverter.class)
     private AnimalType type;
 
-    @Column(name = "comments", nullable = false)
+    @Column(name = "comments")
     private String comments;
 }

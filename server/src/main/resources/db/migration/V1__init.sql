@@ -23,7 +23,7 @@ CREATE TABLE `animal` (
   `animal_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `type` varchar(2) NOT NULL,
-  `comments` varchar(255) NOT NULL,
+  `comments` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`animal_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -34,16 +34,40 @@ CREATE TABLE `vaccine` (
   PRIMARY KEY (`vaccine_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `treatment` (
+  `treatment_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fk_doctor` bigint(20) NOT NULL,
+  `fk_client` bigint(20) NOT NULL,
+  `fk_animal` bigint(20) NOT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`treatment_id`),
+  CONSTRAINT `FK_DOCTOR_TO_PERSON` FOREIGN KEY (`fk_doctor`)
+  REFERENCES `person` (`person_id`),
+  CONSTRAINT `FK_CLIENT_TO_PERSON` FOREIGN KEY (`fk_client`)
+  REFERENCES `person` (`person_id`),
+  CONSTRAINT `FK_TREATMENT_TO_ANIMAL` FOREIGN KEY (`fk_animal`)
+    REFERENCES `animal` (`animal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 -- INSERTS
 -- users
 INSERT INTO `user` (`user_id`, `user_admin`, `user_login`, `user_password`)
 VALUES
 (1, true, 'admin', 'admin');
+INSERT INTO `user` (`user_id`, `user_admin`, `user_login`, `user_password`)
+VALUES
+(2, false, 'client1', 'secret');
 
 -- persons
 INSERT INTO `person` (`person_id`, `name`, `email`, `type`, `fk_user`)
 VALUES
 (1, 'Veterinario 1', 'llacau@gmail.com', 'D', 1);
+INSERT INTO `person` (`person_id`, `name`, `email`, `type`, `fk_user`)
+VALUES
+(2, 'Cliente 1', 'llacau@gmail.com', 'C', 2);
 
 -- vaccines
 INSERT INTO `vaccine` (`vaccine_id`, `name`, `description`)
@@ -66,3 +90,8 @@ VALUES
 INSERT INTO `animal` (`animal_id`, `name`, `type`, `comments`)
 VALUES
 (3, 'Rat', 'R', 'Rat is yellow :)');
+
+-- treatments
+INSERT INTO `treatment` (`treatment_id`, `fk_doctor`, `fk_client`, `fk_animal`, `comments`, `date`)
+VALUES
+(1, 1, 2, 1, 'Treatment was complex and took long.', now());

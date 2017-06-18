@@ -6,4 +6,5 @@ public class ControllerConstants {
     public static final String MAIL = "send-mail";
     public static final String VACCINE = "vaccine";
     public static final String ANIMAL = "animal";
+    public static final String TREATMENT = "treatment";
 }
