@@ -34,7 +34,6 @@ CREATE TABLE `vaccine` (
   PRIMARY KEY (`vaccine_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `treatment` (
   `treatment_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `fk_doctor` bigint(20) NOT NULL,
@@ -51,6 +50,17 @@ CREATE TABLE `treatment` (
     REFERENCES `animal` (`animal_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `vaccine_treatment` (
+  `vaccine_treatment_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fk_treatment` bigint(20) NOT NULL,
+  `fk_vaccine` bigint(20) NOT NULL,
+  `quantity` INTEGER DEFAULT NULL,
+  PRIMARY KEY (`vaccine_treatment_id`),
+  CONSTRAINT `FK_VT_TO_TREATMENT` FOREIGN KEY (`fk_treatment`)
+  REFERENCES `treatment` (`treatment_id`),
+  CONSTRAINT `FK_VT_TO_VACCINE` FOREIGN KEY (`fk_vaccine`)
+  REFERENCES `vaccine` (`vaccine_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- INSERTS
 -- users
@@ -95,3 +105,14 @@ VALUES
 INSERT INTO `treatment` (`treatment_id`, `fk_doctor`, `fk_client`, `fk_animal`, `comments`, `date`)
 VALUES
 (1, 1, 2, 1, 'Treatment was complex and took long.', now());
+
+-- vaccines treatment
+INSERT INTO `vaccine_treatment` (`vaccine_treatment_id`, `fk_treatment`, `fk_vaccine`, `quantity`)
+VALUES
+(1, 1, 1, 3);
+INSERT INTO `vaccine_treatment` (`vaccine_treatment_id`, `fk_treatment`, `fk_vaccine`, `quantity`)
+VALUES
+(2, 1, 2, 1);
+INSERT INTO `vaccine_treatment` (`vaccine_treatment_id`, `fk_treatment`, `fk_vaccine`, `quantity`)
+VALUES
+(3, 1, 3, 2);

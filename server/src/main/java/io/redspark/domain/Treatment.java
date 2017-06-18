@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by lacau on 17/06/17.
@@ -35,6 +36,9 @@ public class Treatment {
     @ManyToOne
     @JoinColumn(name = "fk_animal", referencedColumnName = "animal_id")
     private Animal animal;
+
+    @OneToMany(mappedBy = "treatment")
+    private List<VaccineTreatment> vaccineTreatmentList;
 
     @Column(name = "comments")
     private String comments;
