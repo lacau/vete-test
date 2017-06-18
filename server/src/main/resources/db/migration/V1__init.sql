@@ -66,4 +66,4 @@ VALUES
 (2, 'Cat', 'C', 'Cat is gray.');
 INSERT INTO `animal` (`animal_id`, `name`, `type`, `comments`)
 VALUES
-(3, 'Rat', 'R', 'Rat is yellow spot :)');
+(3, 'Rat', 'R', 'Rat is yellow :)');

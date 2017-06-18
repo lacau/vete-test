@@ -1,6 +1,6 @@
 package io.redspark.domain;
 
-import io.redspark.domain.converter.PersonTypeConverter;
+import io.redspark.domain.converter.AnimalTypeConverter;
 import io.redspark.domain.type.AnimalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +29,7 @@ public class Animal {
     private String name;
 
     @Column(name = "type", nullable = false)
-    @Convert(converter = PersonTypeConverter.class)
+    @Convert(converter = AnimalTypeConverter.class)
     private AnimalType type;
 
     @Column(name = "comments", nullable = false)

@@ -41,7 +41,7 @@ public class VaccineController {
     public List<VaccineDTO> list() {
         final List<Vaccine> vaccineList = vaccineRepository.findAll();
 
-        if (vaccineList == null) {
+        if (vaccineList == null || vaccineList.isEmpty()) {
             throw new WebException(HttpStatus.NOT_FOUND, "vaccine.not.found");
         }
 
@@ -52,7 +52,7 @@ public class VaccineController {
     public List<VaccineDTO> listByName(@PathVariable("name") final String name) {
         final List<Vaccine> vaccineList = vaccineRepository.search(name);
 
-        if (vaccineList == null) {
+        if (vaccineList == null || vaccineList.isEmpty()) {
             throw new WebException(HttpStatus.NOT_FOUND, "vaccine.not.found");
         }
 
