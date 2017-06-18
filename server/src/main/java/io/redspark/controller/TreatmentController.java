@@ -46,4 +46,15 @@ public class TreatmentController {
 
         return treatmentConverter.toDTO(treatmentList);
     }
+
+    @RequestMapping(value = "/list/doctor/{doctorId}", method = GET)
+    public List<TreatmentDTO> listByDoctor(@PathVariable("doctorId") final Long doctorId) {
+        final List<Treatment> treatmentList = treatmentRepository.searchByDoctorId(doctorId);
+
+        if (treatmentList == null || treatmentList.isEmpty()) {
+            throw new WebException(HttpStatus.NOT_FOUND, "treatment.not.found");
+        }
+
+        return treatmentConverter.toDTO(treatmentList);
+    }
 }

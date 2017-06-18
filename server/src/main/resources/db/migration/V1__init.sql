@@ -66,10 +66,13 @@ CREATE TABLE `vaccine_treatment` (
 -- users
 INSERT INTO `user` (`user_id`, `user_admin`, `user_login`, `user_password`)
 VALUES
-(1, true, 'admin', 'admin');
+(1, true, 'vet1', 'admin');
 INSERT INTO `user` (`user_id`, `user_admin`, `user_login`, `user_password`)
 VALUES
 (2, false, 'client1', 'secret');
+INSERT INTO `user` (`user_id`, `user_admin`, `user_login`, `user_password`)
+VALUES
+(3, true, 'vet2', 'admin');
 
 -- persons
 INSERT INTO `person` (`person_id`, `name`, `email`, `type`, `fk_user`)
@@ -78,6 +81,9 @@ VALUES
 INSERT INTO `person` (`person_id`, `name`, `email`, `type`, `fk_user`)
 VALUES
 (2, 'Cliente 1', 'llacau@gmail.com', 'C', 2);
+INSERT INTO `person` (`person_id`, `name`, `email`, `type`, `fk_user`)
+VALUES
+(3, 'Veterinario 2', 'llacau@gmail.com', 'D', 3);
 
 -- vaccines
 INSERT INTO `vaccine` (`vaccine_id`, `name`, `description`)
@@ -105,6 +111,9 @@ VALUES
 INSERT INTO `treatment` (`treatment_id`, `fk_doctor`, `fk_client`, `fk_animal`, `comments`, `date`)
 VALUES
 (1, 1, 2, 1, 'Treatment was complex and took long.', now());
+INSERT INTO `treatment` (`treatment_id`, `fk_doctor`, `fk_client`, `fk_animal`, `comments`, `date`)
+VALUES
+(2, 3, 2, 3, 'Rat Treatment.', now());
 
 -- vaccines treatment
 INSERT INTO `vaccine_treatment` (`vaccine_treatment_id`, `fk_treatment`, `fk_vaccine`, `quantity`)
@@ -116,3 +125,9 @@ VALUES
 INSERT INTO `vaccine_treatment` (`vaccine_treatment_id`, `fk_treatment`, `fk_vaccine`, `quantity`)
 VALUES
 (3, 1, 3, 2);
+INSERT INTO `vaccine_treatment` (`vaccine_treatment_id`, `fk_treatment`, `fk_vaccine`, `quantity`)
+VALUES
+(4, 2, 1, 1);
+INSERT INTO `vaccine_treatment` (`vaccine_treatment_id`, `fk_treatment`, `fk_vaccine`, `quantity`)
+VALUES
+(5, 2, 2, 5);

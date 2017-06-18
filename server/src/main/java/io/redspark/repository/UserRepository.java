@@ -12,5 +12,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select u from User u where UPPER(u.login) like UPPER(?1)")
     Page<User> search(String like, Pageable page);
-
 }
