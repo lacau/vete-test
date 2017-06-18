@@ -35,7 +35,7 @@ public class Person {
     @Convert(converter = PersonTypeConverter.class)
     private PersonType type;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @OneToOne
+    @JoinColumn(name = "fk_user", referencedColumnName = "user_id")
     private User user;
 }
