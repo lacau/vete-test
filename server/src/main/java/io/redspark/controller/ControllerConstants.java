@@ -5,7 +5,7 @@ public interface ControllerConstants {
     String USER = "user";
     String MAIL = "send-mail";
     String VACCINE = "vaccine";
-    String SCHEDULE = "schedule";
+    String VACCINE_SCHEDULE = VACCINE + "/schedule";
     String ANIMAL = "animal";
     String TREATMENT = "treatment";
 }

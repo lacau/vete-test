@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
-import static io.redspark.controller.ControllerConstants.SCHEDULE;
-import static io.redspark.controller.ControllerConstants.VACCINE;
+import static io.redspark.controller.ControllerConstants.VACCINE_SCHEDULE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping(value = VACCINE + "/" + SCHEDULE)
+@RequestMapping(value = VACCINE_SCHEDULE)
 public class ScheduleVaccineController {
 
     @Autowired
