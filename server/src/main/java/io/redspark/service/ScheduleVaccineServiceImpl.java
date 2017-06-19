@@ -10,15 +10,16 @@ import io.redspark.repository.AnimalRepository;
 import io.redspark.repository.PersonRepository;
 import io.redspark.repository.ScheduleVaccineRepository;
 import io.redspark.repository.VaccineRepository;
+import io.redspark.utils.DateUtils;
 import io.redspark.utils.MapperUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,16 +43,20 @@ public class ScheduleVaccineServiceImpl implements ScheduleVaccineService {
     @Autowired
     private AnimalRepository animalRepository;
 
+    @Autowired
+    private DateUtils dateUtils;
+
     @Override
     public List<ScheduleVaccine> searchScheduledVaccine(Integer daysTillVaccine, Boolean notified) {
         final Instant to = Instant.now().plus(daysTillVaccine, ChronoUnit.DAYS);
 
-        return scheduleVaccineRepository.searchBeforeDate(Date.from(to), notified);
+        return scheduleVaccineRepository.searchBeforeDate(java.sql.Date.from(to), notified);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public ScheduleVaccineDTO scheduleVaccine(ScheduleVaccineDTO scheduleVaccineDTO) {
+        final Date date = dateUtils.toDate(scheduleVaccineDTO.getDate());
         final Vaccine vaccine = vaccineRepository.findOne(scheduleVaccineDTO.getVaccine().getId());
         Optional.ofNullable(vaccine).orElseThrow(() -> new NotFoundException("vaccine"));
         final Person client = personRepository.findOne(scheduleVaccineDTO.getClient().getId());
@@ -63,7 +68,7 @@ public class ScheduleVaccineServiceImpl implements ScheduleVaccineService {
                 .vaccine(vaccine)
                 .client(client)
                 .animal(animal)
-                .date(new java.util.Date())
+                .date(date)
                 .notified(scheduleVaccineDTO.getNotified() == null ? false : scheduleVaccineDTO.getNotified())
                 .build();
 
