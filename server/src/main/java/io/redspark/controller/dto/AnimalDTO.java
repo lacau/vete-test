@@ -2,6 +2,7 @@ package io.redspark.controller.dto;
 
 import io.redspark.domain.Animal;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Max;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Getter
 @NoArgsConstructor
 public class AnimalDTO {
 

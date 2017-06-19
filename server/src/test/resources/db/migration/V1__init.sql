@@ -18,7 +18,7 @@ CREATE TABLE animal (
   animal_id INTEGER NOT NULL IDENTITY,
   name varchar(100) NOT NULL,
   type varchar(2) NOT NULL,
-  comments varchar(255) NOT NULL
+  comments varchar(255) DEFAULT NULL
 );
 
 CREATE TABLE vaccine (
@@ -27,35 +27,27 @@ CREATE TABLE vaccine (
   description varchar(255) NOT NULL
 );
 
--- INSERTS
--- users
-INSERT INTO user (user_id, user_admin, user_login, user_password)
-VALUES
-(1, true, 'admin', 'admin');
+CREATE TABLE treatment (
+  treatment_id INTEGER NOT NULL IDENTITY,
+  fk_doctor INTEGER NOT NULL,
+  fk_client INTEGER NOT NULL,
+  fk_animal INTEGER NOT NULL,
+  comments varchar(255) DEFAULT NULL,
+  date DATETIME NOT NULL
+);
 
--- persons
-INSERT INTO person (person_id, name, email, type, fk_user)
-VALUES
-(1, 'Veterinario 1', 'llacau@gmail.com', 'D', 1);
+CREATE TABLE vaccine_treatment (
+  vaccine_treatment_id INTEGER NOT NULL IDENTITY,
+  fk_treatment INTEGER NOT NULL,
+  fk_vaccine INTEGER NOT NULL,
+  quantity INTEGER DEFAULT NULL
+);
 
--- vaccines
-INSERT INTO vaccine (vaccine_id, name, description)
-VALUES
-(1, 'Vaccine 1', 'Description of vaccine one.');
-INSERT INTO vaccine (vaccine_id, name, description)
-VALUES
-(2, 'Vaccine 2', 'Description of vaccine two.');
-INSERT INTO vaccine (vaccine_id, name, description)
-VALUES
-(3, 'Vaccine 3', 'Description of vaccine three.');
-
--- animals
-INSERT INTO animal (animal_id, name, type, comments)
-VALUES
-(1, 'Dog', 'D', 'Dog is black.');
-INSERT INTO animal (animal_id, name, type, comments)
-VALUES
-(2, 'Cat', 'C', 'Cat is gray.');
-INSERT INTO animal (animal_id, name, type, comments)
-VALUES
-(3, 'Rat', 'R', 'Rat is yellow :)');
+CREATE TABLE schedule_vaccine (
+  schedule_vaccine_id INTEGER NOT NULL IDENTITY,
+  fk_vaccine INTEGER NOT NULL,
+  fk_client INTEGER NOT NULL,
+  fk_animal INTEGER NOT NULL,
+  date DATETIME NOT NULL,
+  notified bit(1) NOT NULL
+);
