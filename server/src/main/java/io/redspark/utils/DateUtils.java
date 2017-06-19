@@ -13,13 +13,15 @@ import java.util.Date;
 @Component
 public class DateUtils {
 
-    private final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final String PATTERN = "yyyy-MM-dd HH:mm:ss";
+
+    private final SimpleDateFormat FORMATTER = new SimpleDateFormat(PATTERN);
 
     public Date toDate(String date) {
         try {
             return FORMATTER.parse(date);
         } catch (ParseException e) {
-            throw new ValidationException("Invalid date format. expected: " + FORMATTER.toPattern());
+            throw new ValidationException("Invalid date format. expected: " + PATTERN);
         }
     }
 }
