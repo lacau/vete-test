@@ -21,9 +21,8 @@ public class ScheduleVaccineServiceImpl implements ScheduleVaccineService {
 
     @Override
     public List<ScheduleVaccine> searchScheduledVaccine(Integer daysTillVaccine, Boolean notified) {
-        final Instant from = Instant.now();
         final Instant to = Instant.now().plus(daysTillVaccine, ChronoUnit.DAYS);
 
-        return scheduleVaccineRepository.searchBetweenDates(Date.from(from), Date.from(to), notified);
+        return scheduleVaccineRepository.searchBeforeDate(Date.from(to), notified);
     }
 }

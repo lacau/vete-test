@@ -1,10 +1,11 @@
 package io.redspark.controller;
 
-public class ControllerConstants {
+public interface ControllerConstants {
 
-    public static final String USER = "user";
-    public static final String MAIL = "send-mail";
-    public static final String VACCINE = "vaccine";
-    public static final String ANIMAL = "animal";
-    public static final String TREATMENT = "treatment";
+    String USER = "user";
+    String MAIL = "send-mail";
+    String VACCINE = "vaccine";
+    String SCHEDULE = "schedule";
+    String ANIMAL = "animal";
+    String TREATMENT = "treatment";
 }

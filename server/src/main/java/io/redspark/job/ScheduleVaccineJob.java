@@ -39,8 +39,9 @@ public class ScheduleVaccineJob {
     private SmtpMailSender smtpMailSender;
 
     //@Scheduled(cron = "0 0 12 1/1 * ? *") // 12 hours interval forever
-    @Scheduled(fixedDelay = 30000) // every 30 seconds
+    @Scheduled(fixedDelay = 60000) // every 30 seconds
     public void notifyScheduleVaccineJob() {
+        System.out.println("ScheduleVaccineJob - START");
         final List<ScheduleVaccine> scheduleVaccines = scheduleVaccineService.searchScheduledVaccine(daysBeforeNotify, false);
 
         if (!scheduleVaccines.isEmpty()) {
@@ -59,6 +60,10 @@ public class ScheduleVaccineJob {
                     // Log something preferable with slf4j
                 }
             }
+            System.out.println("ScheduleVaccineJob - All schedule vaccines notified!");
+        } else {
+            System.out.println("ScheduleVaccineJob - Nothing to notify!");
         }
+        System.out.println("ScheduleVaccineJob - END");
     }
 }

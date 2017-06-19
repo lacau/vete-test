@@ -147,3 +147,14 @@ VALUES
 INSERT INTO `vaccine_treatment` (`vaccine_treatment_id`, `fk_treatment`, `fk_vaccine`, `quantity`)
 VALUES
 (5, 2, 2, 5);
+
+-- schedule vaccines
+INSERT INTO `schedule_vaccine` (`schedule_vaccine_id`, `fk_vaccine`, `fk_client`, `fk_animal`, `date`, `notified`)
+VALUES
+(1, 1, 2, 1, now(), false);
+INSERT INTO `schedule_vaccine` (`schedule_vaccine_id`, `fk_vaccine`, `fk_client`, `fk_animal`, `date`, `notified`)
+VALUES
+(2, 2, 2, 1, now() + INTERVAL 2 DAY, false);
+INSERT INTO `schedule_vaccine` (`schedule_vaccine_id`, `fk_vaccine`, `fk_client`, `fk_animal`, `date`, `notified`)
+VALUES
+(3, 3, 2, 1, now() + INTERVAL 10 DAY, false);

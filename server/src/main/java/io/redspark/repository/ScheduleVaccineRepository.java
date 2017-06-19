@@ -12,8 +12,7 @@ import java.util.List;
 
 public interface ScheduleVaccineRepository extends JpaRepository<ScheduleVaccine, Long> {
 
-    @Query("select sv from ScheduleVaccine sv where sv.notified =:notified and sv.date between :from and :to")
-    List<ScheduleVaccine> searchBetweenDates(@Param("from") @Temporal(TemporalType.TIMESTAMP) Date from,
-                                             @Param("to") @Temporal(TemporalType.TIMESTAMP) Date to,
-                                             @Param("notified") Boolean notified);
+    @Query("select sv from ScheduleVaccine sv where sv.notified =:notified and sv.date <=:to")
+    List<ScheduleVaccine> searchBeforeDate(@Param("to") @Temporal(TemporalType.TIMESTAMP) Date to,
+                                           @Param("notified") Boolean notified);
 }
