@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class VaccineDTO {
 
-    @NotNull(message = "vaccine id can not be null or blank.")
+    @NotNull(message = "vaccine id can not be null.")
     @Min(0)
     @Max(Long.MAX_VALUE)
     private Long id;

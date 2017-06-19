@@ -37,7 +37,7 @@ public class Treatment {
     @JoinColumn(name = "fk_animal", referencedColumnName = "animal_id")
     private Animal animal;
 
-    @OneToMany(mappedBy = "treatment")
+    @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
     private List<VaccineTreatment> vaccineTreatmentList;
 
     @Column(name = "comments")
