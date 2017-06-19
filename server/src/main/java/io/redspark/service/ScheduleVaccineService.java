@@ -1,5 +1,6 @@
 package io.redspark.service;
 
+import io.redspark.controller.dto.ScheduleVaccineDTO;
 import io.redspark.domain.ScheduleVaccine;
 
 import java.util.List;
@@ -10,4 +11,6 @@ import java.util.List;
 public interface ScheduleVaccineService {
 
     List<ScheduleVaccine> searchScheduledVaccine(Integer daysTillVaccine, Boolean notified);
+
+    ScheduleVaccineDTO scheduleVaccine(ScheduleVaccineDTO scheduleVaccineDTO);
 }

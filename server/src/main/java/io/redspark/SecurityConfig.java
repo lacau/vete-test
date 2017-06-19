@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Remove after configure spring security and
         // create users authentication over database and etc...
         // Will not be done in a test project
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("/*")
                 .permitAll();
     }
