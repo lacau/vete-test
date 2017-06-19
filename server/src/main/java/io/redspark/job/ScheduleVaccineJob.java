@@ -46,10 +46,8 @@ public class ScheduleVaccineJob {
 
         if (!scheduleVaccines.isEmpty()) {
             for (ScheduleVaccine scheduleVaccine : scheduleVaccines) {
-                final long diff = new Date().getTime() - scheduleVaccine.getDate().getTime();
-                long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
                 final String email = scheduleVaccine.getClient().getEmail();
+                final long days = calculateDays(scheduleVaccine.getDate());
 
                 try {
                     smtpMailSender.send(email, emailSubject, emailBody.replace("$1", String.valueOf(days)));
@@ -65,5 +63,16 @@ public class ScheduleVaccineJob {
             System.out.println("ScheduleVaccineJob - Nothing to notify!");
         }
         System.out.println("ScheduleVaccineJob - END");
+    }
+
+    private long calculateDays(Date scheduleDate) {
+        final long diff = new Date().getTime() - scheduleDate.getTime();
+        final long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        if (days < 0) {
+            return 0;
+        }
+
+        return days;
     }
 }
