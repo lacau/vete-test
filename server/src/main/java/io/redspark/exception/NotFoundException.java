@@ -4,10 +4,7 @@ import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends WebException {
 
-  private static final long serialVersionUID = 2799179465862669781L;
-
-  public NotFoundException(Class<?> clazz) {
-    super(HttpStatus.NOT_FOUND, clazz.getName() + ".notFound");
-  }
-
+    public NotFoundException(String field) {
+        super(HttpStatus.NOT_FOUND, field + ".notFound");
+    }
 }
