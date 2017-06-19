@@ -29,7 +29,7 @@ import java.util.Optional;
 @Service
 public class ScheduleVaccineServiceImpl implements ScheduleVaccineService {
 
-    private static MapperUtils<ScheduleVaccine, ScheduleVaccineDTO> scheduleVaccineConverter = new MapperUtils<>(ScheduleVaccine.class, ScheduleVaccineDTO.class);
+    private MapperUtils<ScheduleVaccine, ScheduleVaccineDTO> scheduleVaccineConverter = new MapperUtils<>(ScheduleVaccine.class, ScheduleVaccineDTO.class);
 
     @Autowired
     private ScheduleVaccineRepository scheduleVaccineRepository;
