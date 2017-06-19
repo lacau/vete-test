@@ -26,7 +26,7 @@ import java.util.Optional;
 @Service
 public class TreatmentServiceImpl implements TreatmentService {
 
-    private static MapperUtils<Treatment, TreatmentDTO> treatmentConverter = new MapperUtils<>(Treatment.class, TreatmentDTO.class);
+    private MapperUtils<Treatment, TreatmentDTO> treatmentConverter = new MapperUtils<>(Treatment.class, TreatmentDTO.class);
 
     @Autowired
     private TreatmentRepository treatmentRepository;

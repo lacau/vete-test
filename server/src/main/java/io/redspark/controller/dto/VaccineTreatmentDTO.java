@@ -1,6 +1,8 @@
 package io.redspark.controller.dto;
 
 import io.redspark.domain.VaccineTreatment;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +11,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class VaccineTreatmentDTO {
 
     @NotNull(message = "vaccine id can not be null.")

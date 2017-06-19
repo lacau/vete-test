@@ -1,9 +1,7 @@
 package io.redspark.controller.dto;
 
 import io.redspark.domain.Animal;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -11,7 +9,9 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class AnimalDTO {
 
     @NotNull(message = "animal id can not be null.")
