@@ -39,4 +39,7 @@ public class ScheduleVaccine {
     @Column(name = "date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+
+    @Column(name = "notified")
+    private Boolean notified;
 }

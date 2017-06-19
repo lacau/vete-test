@@ -68,6 +68,7 @@ CREATE TABLE `schedule_vaccine` (
   `fk_client` bigint(20) NOT NULL,
   `fk_animal` bigint(20) NOT NULL,
   `date` DATETIME NOT NULL,
+  `notified` bit(1) NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`schedule_vaccine_id`),
   CONSTRAINT `FK_SV_TO_VACCINE` FOREIGN KEY (`fk_vaccine`)
   REFERENCES `vaccine` (`vaccine_id`),
